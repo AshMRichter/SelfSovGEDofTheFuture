@@ -73,3 +73,41 @@ At its core, a GenGraph file is a JSON object with typed node lists and relation
   "titles": [],
   "relations": []
 }
+
+
+Everything is identified by a simple id string (e.g. "P1", "E3", "S7").
+Relations connect these IDs and can carry provenance and confidence.
+
+For more detail, see SPEC.md
+
+.
+
+Getting started (Python)
+
+Requirements: Python 3.10+ (no external dependencies).
+
+git clone https://github.com/YOURNAME/gengraph.git
+cd gengraph
+python -m gengraph examples/minimal_example.gengraph.json
+
+
+You should see basic info about the file printed to stdout.
+
+Contributing
+
+See CONTRIBUTING.md
+
+and the prompts in
+DISCUSSION_TOPICS.md
+
+.
+
+This project is explicitly open to:
+
+Genealogists and family historians
+
+Archivists, librarians, digital humanities folks
+
+Graph/data modelling people
+
+Identity / SSI / verifiable-credentials nerds
