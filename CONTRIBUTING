@@ -1,0 +1,34 @@
+# Contributing to GenGraph
+
+Thanks for your interest in this weird little experiment.
+
+At this stage, contributions that are **most helpful** include:
+
+- Opening issues describing:
+  - Real-world genealogical use cases that this model doesn't handle well
+  - Existing standards / formats we should align with
+  - Concerns about privacy, ethics, or misuse
+- Proposing changes to `SPEC.md`:
+  - Better field names
+  - Additional entity types
+  - Cleaner relation semantics
+- Providing example data:
+  - Small, anonymised graphs illustrating tricky scenarios
+-Calling out additional gaps in the .GED file format and proprietary variants with ancestry websites that need resolving in a future format like ths one
+
+## Ground rules
+
+- Be kind. Many contributors will come from different domains (genealogy, archives,
+  SSI, graph databases, etc.).
+- Assume good faith, critique ideas not people.
+- Use issues and pull requests for technical changes.
+- If you're proposing a major change to the data model:
+  - Please start by opening an issue
+  - Or draft a short proposal document and link it from the issue
+
+## Development
+
+There's a tiny Python helper that can load and summarise GenGraph files:
+
+```bash
+python -m gengraph examples/minimal_example.gengraph.json
