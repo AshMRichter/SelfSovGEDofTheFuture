@@ -1,0 +1,74 @@
+gengraph/__init__.py
+
+"""GenGraph: minimal helpers for the GenGraph genealogical format."""
+
+from .io import load_gengraph, summarize_gengraph
+
+__all__ = ["load_gengraph", "summarize_gengraph"]
+
+
+def main() -> None:
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description="Inspect a GenGraph (.json) file."
+    )
+    parser.add_argument("path", help="Path to a GenGraph JSON file.")
+    args = parser.parse_args()
+
+    data = load_gengraph(args.path)
+    summarize_gengraph(data)
+
+
+if __name__ == "__main__":
+    main()
+
+
+Simpler?
+
+from dataclasses import dataclass, field
+from typing import List, Optional, Dict, Any
+
+
+@dataclass
+class Name:
+    given: Optional[str] = None
+    middle: Optional[str] = None
+    surname: Optional[str] = None
+    prefix: Optional[str] = None
+    suffix: Optional[str] = None
+    note: Optional[str] = None
+
+
+@dataclass
+class Person:
+    id: str
+    primaryName: Optional[Name] = None
+    altNames: List[Name] = field(default_factory=list)
+    gender: Optional[str] = None
+    birthEventId: Optional[str] = None
+    deathEventId: Optional[str] = None
+    note: Optional[str] = None
+
+
+def dict_to_person(d: Dict[str, Any]) -> Person:
+    primary = d.get("primaryName")
+    alt = d.get("altNames", [])
+
+    primary_name = Name(**primary) if isinstance(primary, dict) else None
+    alt_names = [Name(**n) for n in alt if isinstance(n, dict)]
+
+    return Person(
+        id=d["id"],
+        primaryName=primary_name,
+        altNames=alt_names,
+        gender=d.get("gender"),
+        birthEventId=d.get("birthEventId"),
+        deathEventId=d.get("deathEventId"),
+        note=d.get("note"),
+    )
+
+To Do Note: Scale across other variables similarly, test. 
+
+
+To Do 
