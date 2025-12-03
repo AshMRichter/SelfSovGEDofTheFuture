@@ -74,6 +74,20 @@ At its core, a GenGraph file is a JSON object with typed node lists and relation
   "relations": []
 }
 
+Metadata about this file as a whole.
+
+Example:
+
+"meta": {
+  "label": "Vest family sketch",
+  "description": "Early experiment with the Vest / West line.",
+  "createdBy": "ash@example.com",
+  "createdAt": "2025-12-03T10:00:00Z",
+  "sourceSystem": "Custom script from GEDCOM 1.0"
+}
+
+
+Fields are free-form for now; implementations should not rely on any specific keys.
 
 Everything is identified by a simple id string (e.g. "P1", "E3", "S7").
 Relations connect these IDs and can carry provenance and confidence.
