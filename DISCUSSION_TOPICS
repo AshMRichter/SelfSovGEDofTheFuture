@@ -1,0 +1,54 @@
+# Discussion Topics & Open Questions
+
+This file is intentionally opinionated to spark debate.
+
+## 1. Entities vs. claims
+
+Right now, relations connect `fromId` → `toId` with a simple `type`.
+
+- Should we introduce a first-class **Claim/Assertion** object?
+- Would that be overkill for most genealogists?
+- How do we balance simple usage vs. rigorous provenance?
+
+## 2. Alignment with existing standards
+
+- Which existing vocabularies/ontologies (e.g., FOAF, CIDOC-CRM, GEDCOM X, GEDCOM 7)
+  should we look at for inspiration or alignment?
+- Is it better to:
+  - define a small, pragmatic core, or
+  - aim for direct compatibility with a specific existing standard?
+
+## 3. IDs and global identity
+
+- Should GenGraph encourage:
+  - simple local IDs (P1, P2) only, or
+  - optional global IDs (URIs, ARKs, DOIs, DIDs, etc.)?
+- How do we handle the "same person in multiple files" problem?
+- Is there a future for **self-sovereign identity** style approaches here?
+
+## 4. Privacy and ethics
+
+- How should we handle living persons?
+  - Separate encrypted files?
+  - Flags at the Person level?
+- How might this data be misused?
+  - What design choices could mitigate abuse?
+
+## 5. Titles and land
+
+- What minimal structure would support:
+  - "lost titles" / "dropped titles" analysis?
+  - property / land history analysis?
+- Should we encode basic inheritance rules at the Title level?
+- How far do we go into legal modelling vs. leaving that to external tools?
+
+## 6. GEDCOM interop
+
+- If you maintain genealogy software, what would you need to:
+  - Export GenGraph?
+  - Import GenGraph?
+- Are there "must-have" items for GEDCOM compatibility that are currently missing?
+
+---
+
+Feel free to add topics, links, or short proposals and open a PR.
