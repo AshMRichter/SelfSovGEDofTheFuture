@@ -1,0 +1,108 @@
+Example 1: 
+{
+  "gengraphVersion": "0.1.0",
+  "meta": {
+    "label": "Minimal example",
+    "description": "Tiny GenGraph file showing core structures.",
+    "createdBy": "example@example.com",
+    "createdAt": "2025-12-03T10:00:00Z"
+  },
+  "persons": [
+    {
+      "id": "P1",
+      "primaryName": {
+        "given": "Thomas",
+        "surname": "Vest"
+      },
+      "gender": "male",
+      "birthEventId": "E1",
+      "note": "Hypothetical example person."
+    },
+    {
+      "id": "P2",
+      "primaryName": {
+        "given": "Rebecca",
+        "surname": "Cannefax"
+      },
+      "gender": "female",
+      "birthEventId": "E2"
+    }
+  ],
+  "events": [
+    {
+      "id": "E1",
+      "type": "birth",
+      "date": "1760-01-01",
+      "placeId": "PL1",
+      "participantIds": ["P1"],
+      "sourceIds": ["S1"],
+      "note": "Date approximate."
+    },
+    {
+      "id": "E2",
+      "type": "birth",
+      "dateRange": {
+        "earliest": "1760-01-01",
+        "latest": "1765-12-31"
+      },
+      "placeId": "PL1",
+      "participantIds": ["P2"],
+      "sourceIds": ["S1"]
+    },
+    {
+      "id": "E3",
+      "type": "marriage",
+      "date": "1783-06-15",
+      "placeId": "PL1",
+      "participantIds": ["P1", "P2"],
+      "sourceIds": ["S2"]
+    }
+  ],
+  "places": [
+    {
+      "id": "PL1",
+      "name": "Augusta County, Virginia",
+      "type": "county"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "type": "compiled",
+      "title": "Vest family notes",
+      "citation": "Unpublished family compilation."
+    },
+    {
+      "id": "S2",
+      "type": "marriageRecord",
+      "title": "Augusta County marriage register",
+      "citation": "Augusta County, Virginia, Marriage Register, 1783, p. 12."
+    }
+  ],
+  "properties": [],
+  "titles": [],
+  "relations": [
+    {
+      "id": "R1",
+      "type": "SPOUSE_OF",
+      "fromId": "P1",
+      "toId": "P2",
+      "sourceIds": ["S2"],
+      "confidence": 0.9,
+      "note": "From marriage register."
+    },
+    {
+      "id": "R2",
+      "type": "PARENT_OF",
+      "fromId": "P1",
+      "toId": "P3",
+      "sourceIds": [],
+      "confidence": 0.2,
+      "note": "Hypothetical child relation; P3 not defined in this example."
+    }
+  ]
+}
+
+
+Example 2
+
