@@ -258,3 +258,163 @@ Deliverable:
 A new doc (e.g. GEDCOM_MAPPING.md) with a first-pass mapping table.
 
 Future work: separate issue for an actual converter script.
+
+4. Examples & documentation
+Issue 10 — Add more realistic example datasets
+
+Title: Add more realistic GenGraph example files
+
+Body:
+
+The repo currently has only minimal_example.gengraph.json.
+
+It would be helpful to add:
+
+A “medium complexity” example:
+
+10–20 persons
+
+Several events, places, and sources
+
+At least one property and one title
+
+Some conflicting or low-confidence relations
+
+Possibly an anonymised or fictional dataset that shows:
+
+Migration
+
+Multi-generational relationships
+
+Different evidence strengths
+
+These examples will be crucial for:
+
+Testing
+
+Onboarding new contributors
+
+Evaluating schema changes.
+
+Issue 11 — Improve README with diagrams and narrative use-cases
+
+Title: Improve README with diagrams and example use-cases
+
+Body:
+
+The current README.md explains the idea but could be more visual and narrative.
+
+Proposed improvements:
+
+Add 1–2 simple diagrams (e.g. person–event–place graph)
+
+Describe 2–3 concrete workflows:
+
+A genealogist using GenGraph to represent complex evidence
+
+An archivist mapping collections and people
+
+A developer building a graph-based visualization or query engine
+
+Goal: make it immediately obvious to newcomers what GenGraph is for and why it’s interesting.
+
+Issue 12 — Add FAQ section (format vs. product; open-source vs. commercial use)
+
+Title: Add FAQ explaining scope, philosophy, and potential use cases
+
+Body:
+
+Many people may ask:
+
+Is GenGraph meant to replace GEDCOM?
+
+Is this “just a file format” or a product?
+
+Can I use this commercially?
+
+How does this relate to standards like CIDOC-CRM, GEDCOM X, etc.?
+
+We should add an FAQ section to the README (or a separate FAQ.md) that addresses:
+
+Scope of the project (spec + reference tools)
+
+Intended interoperability with existing standards
+
+License and commercial usage expectations
+
+How people can safely experiment or integrate this in their own projects.
+
+5. Ecosystem & alignment
+Issue 13 — Survey related standards (CIDOC-CRM, GEDCOM X, JSON-LD, etc.)
+
+Title: Survey and document related standards (CIDOC-CRM, GEDCOM X, JSON-LD, etc.)
+
+Body:
+
+Before GenGraph evolves too far, we should look sideways at:
+
+CIDOC-CRM / CRM extensions
+
+GEDCOM X
+
+GEDCOM 7 (and tooling around it)
+
+JSON-LD / RDF vocabularies used in cultural heritage
+
+Task:
+
+Collect links, short summaries, and key insights from existing work
+
+Add a section to SPEC.md or a new RELATED_WORK.md
+
+Goal: avoid reinventing wheels where unnecessary and position GenGraph clearly in that landscape.
+
+Issue 14 — Explore JSON-LD / linked-data compatibility
+
+Title: Explore JSON-LD / linked-data compatibility for GenGraph
+
+Body:
+
+GenGraph is currently “plain JSON”, but much of what it does overlaps with linked data / RDF ideas.
+
+Questions:
+
+Should we define an optional JSON-LD @context for GenGraph?
+
+Could entities be easily mapped to IRIs for use in RDF stores?
+
+How do we keep the spec usable by non-linked-data people while still being compatible?
+
+Deliverable:
+
+A short design note or prototype @context file for JSON-LD.
+
+Recommendation on whether this should be part of v0.x or later.
+
+Issue 15 — Titles and property modelling: minimal requirements
+
+Title: Define minimal modelling for titles and properties (lost titles / land analysis)
+
+Body:
+
+One motivating use case for GenGraph is:
+
+Tracking titles (noble, chivalric, offices)
+
+Tracking properties (land, estates)
+
+Exploring inheritance patterns, “lost titles”, property anomalies, etc.
+
+We should clarify:
+
+What fields are minimally necessary on Title and Property to support:
+
+Historical research
+
+Automated reasoning / rule engines
+
+What belongs in GenGraph vs. what should be handled by external legal/logic layers
+
+Output:
+
+Updated sections in SPEC.md with clearer guidance and examples for Title and Property.
