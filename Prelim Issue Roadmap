@@ -1,0 +1,260 @@
+1. Core spec & schema
+Issue 1 — Refine GenGraph v0.1 core entity model
+
+Title: Refine GenGraph v0.1 core entity model (persons, events, places, sources, properties, titles)
+
+Body:
+
+The current SPEC.md defines six core entities:
+
+Person
+
+Event
+
+Place
+
+Source
+
+Property
+
+Title
+
+This issue is for discussion and refinement of that core set:
+
+Are these the right “atoms”?
+
+Are we missing any obvious entity types for v0.1?
+
+Are any of these too granular / not granular enough?
+
+Are there fields that should be required vs optional?
+
+Please comment with:
+
+Real-world examples where this model works well
+
+Real-world examples where this model breaks down
+
+Concrete proposed changes to SPEC.md
+
+Goal: converge on a slightly more battle-tested v0.1 entity set before considering v0.2.
+
+Issue 2 — Introduce a first-class Claim / Assertion object?
+
+Title: Consider first-class Claim / Assertion objects for evidence-heavy use cases
+
+Body:
+
+Right now, evidence/provenance lives mostly on:
+
+Event.sourceIds
+
+Relation.sourceIds
+
+This keeps v0.1 simple, but may be too limited for:
+
+Contradictory evidence
+
+Complex reasoning chains
+
+“Soft” claims like hypotheses and research notes
+
+Proposal to discuss: introduce a first-class Claim/Assertion entity, e.g.:
+
+{
+  "id": "C1",
+  "subjectId": "P1",
+  "predicate": "bornIn",
+  "objectId": "PL1",
+  "dateRange": { "earliest": "1759-01-01", "latest": "1761-12-31" },
+  "sourceIds": ["S1", "S2"],
+  "confidence": 0.7,
+  "note": "Census + baptism; dates approximate."
+}
+
+
+Questions:
+
+Is this worth the extra complexity for v0.1/v0.2?
+
+Would a Claim layer replace some Relations, or sit beside them?
+
+Can we keep a “simple mode” and an “advanced mode”?
+
+Looking for feedback from genealogists, archivists, and graph/ontology folks.
+
+Issue 3 — Improve date handling (uncertainty, ranges, partial dates)
+
+Title: Improve date representation (uncertain dates, ranges, partial dates)
+
+Body:
+
+v0.1 supports:
+
+date: free-form string
+
+dateRange: { earliest, latest } strings
+
+We should discuss:
+
+Recommended formats (ISO-like? GEDCOM-style date parsing?)
+
+How to encode partial dates (month/year, year only)
+
+Uncertain dates (e.g. “before 1750”, “after 1790”)
+
+Whether date should be constrained more tightly for interoperability
+
+Deliverables:
+
+Updated guidance in SPEC.md
+
+Maybe an optional “date encoding profile” or examples section.
+
+Issue 4 — Relation types: recommended vocabulary & best practices
+
+Title: Define recommended relation types and best practices for relations[]
+
+Body:
+
+Current spec suggests (but does not enforce) relation types like:
+
+PARENT_OF, CHILD_OF, SPOUSE_OF, SIBLING_OF
+
+PARTICIPANT_IN, OCCURRED_AT
+
+OWNED_PROPERTY, INHERITED_PROPERTY, HELD_TITLE
+
+CONFLICTS_WITH, ALTERNATIVE_TO
+
+This issue is to:
+
+Propose a recommended core vocabulary of relation types
+
+Clarify directionality (e.g. we store PARENT_OF but not CHILD_OF, or both?)
+
+Decide how strict v0.1 should be (free-text vs controlled vocabulary)
+
+Goal: document a “recommended core relations table” in SPEC.md without over-constraining experimentation.
+
+2. JSON Schema & validation
+Issue 5 — Add JSON Schema validation helper (Python)
+
+Title: Add optional JSON Schema validation helper in Python
+
+Body:
+
+We already have schema/gengraph.schema.json for v0.1.
+
+This issue is to:
+
+Add an optional Python-based validator (e.g. using jsonschema)
+
+Wire a small validate_gengraph.py script or function
+
+Document how to run validation on a file
+
+Constraints:
+
+Keep core dependencies minimal (maybe put jsonschema in an [extra] group or separate script).
+
+Nice to have:
+
+Pre-commit hook example for validating .gengraph.json files.
+
+Issue 6 — Expand schema with richer examples & comments
+
+Title: Expand JSON Schema with richer examples and description fields
+
+Body:
+
+The current JSON Schema is minimal and mostly structural.
+
+Improvements to consider:
+
+Add "description" metadata for each definition (person, event, place, etc.)
+
+Add "examples" where helpful
+
+Clarify which fields are recommended vs truly optional
+
+This will help tooling, documentation generators, and new contributors.
+
+3. Tooling & code
+Issue 7 — Implement basic in-memory graph view
+
+Title: Implement a basic in-memory graph view (nodes + adjacency)
+
+Body:
+
+Right now, gengraph/io.py just loads JSON and prints counts.
+
+This issue proposes adding a minimal graph view:
+
+Build adjacency mappings for relations[]
+
+Helper functions like:
+
+get_person(data, id)
+
+get_relations_for(id)
+
+get_spouses(personId)
+
+get_children(personId)
+
+Keep it simple and in-memory: no DB / external deps yet.
+
+Goal: make it easy for others to experiment with GenGraph in Python notebooks / scripts.
+
+Issue 8 — Add command-line tool to inspect and query a GenGraph file
+
+Title: Add CLI commands to inspect/query a GenGraph file
+
+Body:
+
+Extend the existing python -m gengraph behavior to support subcommands, e.g.:
+
+gengraph summary <file> – current summary output
+
+gengraph list-persons <file> – IDs and names
+
+gengraph show-person <file> <personId> – detail view
+
+Stretch goals:
+
+gengraph neighbors <file> <entityId> – show directly connected relations
+
+This would:
+
+Demonstrate usage of the format
+
+Give people something tangible to play with quickly.
+
+Issue 9 — Outline GEDCOM → GenGraph converter
+
+Title: Design outline for GEDCOM → GenGraph converter
+
+Body:
+
+A key promise of GenGraph is: “Import from GEDCOM, add richness.”
+
+This issue is about design, not full implementation:
+
+Document a mapping from common GEDCOM tags to GenGraph structures
+
+Identify ambiguous / lossy mappings
+
+Decide which GEDCOM fields we will:
+
+map directly
+
+stash in note fields
+
+ignore (for now)
+
+Deliverable:
+
+A new doc (e.g. GEDCOM_MAPPING.md) with a first-pass mapping table.
+
+Future work: separate issue for an actual converter script.
