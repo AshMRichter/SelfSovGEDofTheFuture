@@ -5,7 +5,7 @@ Title: Refine GenGraph v0.1 core entity model (persons, events, places, sources,
 
 Body:
 
-The current SPEC.md defines six core entities:
+The current SPEC.md defines six core entities::
 
 Person
 
